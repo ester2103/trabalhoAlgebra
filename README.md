@@ -1,3 +1,3 @@
 # Cenario 1 
-trabalho osvaldo </br>
-Cauan Gomes
+Trabalho osvaldo </br>
+Cauan </br> Ester </br> Juliana </br> Andrey </br> Henrique
