@@ -1,45 +1,40 @@
 public class Vector {
+    private int[] elements; // Elementos do vetor
 
-    int[] elementos;
-
-    public Vector(int tamanho) {
-        elementos = new int[tamanho];
+    // Construtor
+    public Vector(int[] elements) {
+        if (elements == null) {
+            throw new IllegalArgumentException("O array de elementos não pode ser nulo.");
+        }
+        this.elements = elements;
     }
 
-    public void set(int indice, int valor) {
-        elementos[indice] = valor;
+    // Método para obter o tamanho do vetor
+    public int size() {
+        return elements.length;
     }
 
-    public int get(int indice) {
-        return elementos[indice];
+    // Método para obter o valor em uma posição específica
+    public int get(int index) {
+        if (index < 0 || index >= elements.length) {
+            throw new IllegalArgumentException("Índice fora dos limites do vetor.");
+        }
+        return elements[index];
     }
 
-    public void mostrar() {
-        for (int i = 0; i < elementos.length; i++) {
-            System.out.print(elementos[i] + " ");
+    // Método para definir o valor em uma posição específica
+    public void set(int index, int value) {
+        if (index < 0 || index >= elements.length) {
+            throw new IllegalArgumentException("Índice fora dos limites do vetor.");
+        }
+        elements[index] = value;
+    }
+
+    // Método para imprimir o vetor
+    public void show() {
+        for (int i = 0; i < elements.length; i++) {
+            System.out.print(elements[i] + " ");
         }
         System.out.println();
-    }
-
-
-
-
-}
-public class Main {
-
-    public static void main(String[] args) {
-        Vector meuVetor = new Vector(5);
-
-        meuVetor.set(0, 10);
-        meuVetor.set(1, 20);
-        meuVetor.set(2, 30);
-        meuVetor.set(3, 40);
-        meuVetor.set(4, 50);
-
-        System.out.println("Elementos do vetor:");
-        meuVetor.mostrar();
-
-        int valorNaPosicao2 = meuVetor.get(2);
-        System.out.println("Valor na posição 2: " + valorNaPosicao2);
     }
 }

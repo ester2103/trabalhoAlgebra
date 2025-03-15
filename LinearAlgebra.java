@@ -17,25 +17,15 @@ public class LinearAlgebra {
             Matrix matrix = (Matrix) object;
             int rows = matrix.getRows();
             int cols = matrix.getCols();
-            int[][] transposedElements = new int[cols][rows];
+            int[] transposedElements = new int[rows * cols];
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    transposedElements[j][i] = matrix.get(i, j);
+                    transposedElements[j * rows + i] = matrix.get(i, j);
                 }
             }
 
-            // Converte o array bidimensional em unidimensional
-            int[] flattenedElements = new int[cols * rows];
-            int index = 0;
-            for (int i = 0; i < cols; i++) {
-                for (int j = 0; j < rows; j++) {
-                    flattenedElements[index] = transposedElements[i][j];
-                    index++;
-                }
-            }
-
-            return new Matrix(cols, rows, flattenedElements);
+            return new Matrix(cols, rows, transposedElements);
         } else if (object instanceof Vector) {
             // Transpor um vetor (transformar em matriz coluna)
             Vector vector = (Vector) object;
@@ -73,25 +63,15 @@ public class LinearAlgebra {
 
             int rows = matrixA.getRows();
             int cols = matrixA.getCols();
-            int[][] sumElements = new int[rows][cols];
+            int[] sumElements = new int[rows * cols];
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    sumElements[i][j] = matrixA.get(i, j) + matrixB.get(i, j);
+                    sumElements[i * cols + j] = matrixA.get(i, j) + matrixB.get(i, j);
                 }
             }
 
-            // Converte o array bidimensional em unidimensional
-            int[] flattenedElements = new int[rows * cols];
-            int index = 0;
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    flattenedElements[index] = sumElements[i][j];
-                    index++;
-                }
-            }
-
-            return new Matrix(rows, cols, flattenedElements);
+            return new Matrix(rows, cols, sumElements);
         } else if (objectA instanceof Vector && objectB instanceof Vector) {
             // Soma de vetores
             Vector vectorA = (Vector) objectA;
