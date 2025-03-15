@@ -1,2 +1,3 @@
-# trabalhoAlgebra
-trabalho osvaldo
+# Cenario 1 
+trabalho osvaldo /br
+Cauan Gomes
