@@ -1,11 +1,11 @@
 package trabalhoAlgebra;
 
-public class Matriz {
+public class Matrix {
     int rows;
     int cols;
     int[][] elements;
 
-    public Matriz(int rows, int cols, int[] elements) {
+    public Matrix(int rows, int cols, int[] elements) {
         this.rows = rows;
         this.cols = cols;
         this.elements = new int[rows][cols];
@@ -36,9 +36,11 @@ public class Matriz {
        
     }
 //para imprimir a matriz 
-    public void printMatriz() {
+    public void printMatrix() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print(elements[i][j] + " ");
             }
             System.out.println();
+        }
+    }
