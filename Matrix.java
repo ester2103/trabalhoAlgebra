@@ -1,5 +1,3 @@
-package trabalhoAlgebra;
-
 public class Matrix {
     int rows;
     int cols;
