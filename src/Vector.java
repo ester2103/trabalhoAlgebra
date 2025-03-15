@@ -1,4 +1,4 @@
-package scr;
+package src;
 public class Vector {
     private int[] elements; // Elementos do vetor
 
