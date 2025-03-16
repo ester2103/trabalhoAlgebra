@@ -1,7 +1,5 @@
 package src;
-
 public class LinearAlgebra {
-
     /**
      * Transpõe uma matriz ou vetor.
      *
@@ -92,5 +90,71 @@ public class LinearAlgebra {
         } else {
             throw new IllegalArgumentException("Tipos incompatíveis. Use Matrix ou Vector.");
         }
+    }
+    // Metodo para multiplicar um escalar com uma matriz ou vetor
+    public Object times(int scalar, Object object) {
+        if (object == null) {
+            throw new IllegalArgumentException("O objeto não pode ser nulo.");
+        }
+
+        if (object instanceof Matrix) {
+            // Multiplicar uma matriz pelo escalar
+            Matrix matrix = (Matrix) object;
+            int rows = matrix.getRows();
+            int cols = matrix.getCols();
+            int[] resultElements = new int[rows * cols];
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    resultElements[i * cols + j] = scalar * matrix.get(i, j);
+                }
+            }
+            return new Matrix(rows, cols, resultElements);
+
+        } else if (object instanceof Vector) {
+            // Multiplicar um vetor pelo escalar
+            Vector vector = (Vector) object;
+            int[] resultElements = new int[vector.size()];
+
+            for (int i = 0; i < vector.size(); i++) {
+                resultElements[i] = scalar * vector.get(i);
+            }
+            return new Vector(resultElements);
+
+        } else {
+            throw new IllegalArgumentException("Tipo de objeto não suportado. Use Matrix ou Vector.");
+        }
+    }
+
+    // Metodo para multiplicar duas matrizes
+    public Matrix dot(Matrix matrixA, Matrix matrixB) {
+        if (matrixA == null || matrixB == null) {
+            throw new IllegalArgumentException("As matrizes não podem ser nulas.");
+        }
+
+        int rowsA = matrixA.getRows();
+        int colsA = matrixA.getCols();
+        int rowsB = matrixB.getRows();
+        int colsB = matrixB.getCols();
+
+        // Verifica se a multiplicação de matrizes é possível
+        if (colsA != rowsB) {
+            throw new IllegalArgumentException("Número de colunas de A deve ser igual ao número de linhas de B.");
+        }
+
+        int[] resultElements = new int[rowsA * colsB];
+
+        // Multiplicação de matrizes (produto matricial)
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                int sum = 0;
+                for (int k = 0; k < colsA; k++) {
+                    sum += matrixA.get(i, k) * matrixB.get(k, j);
+                }
+                resultElements[i * colsB + j] = sum;
+            }
+        }
+
+        return new Matrix(rowsA, colsB, resultElements);
     }
 }
