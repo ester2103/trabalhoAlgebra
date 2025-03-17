@@ -12,7 +12,7 @@ public class Main {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    resultElements[i * cols + j] = a * matrix.get(i, j);
+                    resultElements[i * cols + j] = (int)(a * matrix.get(i, j));
                 }
             }
 
@@ -132,6 +132,22 @@ public class Main {
         System.out.println("Vetor A multiplicado por escalar " + scalar + ":");
         Vector scaledVector = (Vector) times(scalar, vectorA);
         scaledVector.show();
-    }
 
+
+        System.out.println("\n=== Teste de Eliminação Gaussiana ===");
+        int[] gaussMatrixElements = {2, 1, -1, 8, -3, -1, 2, -11, -2, 1, 2, -3};
+        Matrix gaussMatrix = new Matrix(3, 4, gaussMatrixElements);
+
+        System.out.println("Matriz aumentada antes da eliminação gaussiana:");
+        gaussMatrix.printMatrix();
+
+        Matrix gaussResult = linearAlgebra.gauss(gaussMatrix);
+        System.out.println("Matriz após eliminação gaussiana:");
+        gaussResult.printMatrix();
+
+        System.out.println("\n=== Teste de Resolução de Sistema Linear ===");
+        Matrix solution = linearAlgebra.solve(gaussMatrix);
+        System.out.println("Solução do sistema:");
+        solution.printMatrix();
+    }
 }
