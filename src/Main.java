@@ -77,6 +77,40 @@ public class Main {
         gaussMatrix.printMatrix();
     }
 
+    // Método para criar uma matriz manualmente
+    private static Matrix criarMatriz(Scanner scanner) {
+        System.out.print("Digite o número de linhas da matriz: ");
+        int rows = scanner.nextInt();
+        System.out.print("Digite o número de colunas da matriz: ");
+        int cols = scanner.nextInt();
+        int[] elements = new int[rows * cols];
+
+        System.out.println("Digite os elementos da matriz (linha por linha):");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.printf("Elemento a[%d][%d]: ", i, j); // Mostra o índice (i, j)
+                elements[i * cols + j] = scanner.nextInt(); // Armazena o valor na posição correta
+            }
+        }
+
+        return new Matrix(rows, cols, elements);
+    }
+
+    // Método para criar um vetor manualmente
+    private static Vector criarVetor(Scanner scanner) {
+        System.out.print("Digite o tamanho do vetor: ");
+        int size = scanner.nextInt();
+        int[] elements = new int[size];
+
+        System.out.println("Digite os elementos do vetor:");
+        for (int i = 0; i < size; i++) {
+            System.out.printf("Elemento v[%d]: ", i); // Mostra o índice (i)
+            elements[i] = scanner.nextInt();
+        }
+
+        return new Vector(elements);
+    }
+
     // Método para exibir o menu de operações
     private static void menuOperacoes(Matrix matrixA, Matrix matrixB, Vector vectorA, Vector vectorB, Matrix gaussMatrix, LinearAlgebra linearAlgebra) {
         Scanner scanner = new Scanner(System.in);
@@ -198,36 +232,6 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-    }
-
-    // Método para criar uma matriz manualmente
-    private static Matrix criarMatriz(Scanner scanner) {
-        System.out.print("Digite o número de linhas da matriz: ");
-        int rows = scanner.nextInt();
-        System.out.print("Digite o número de colunas da matriz: ");
-        int cols = scanner.nextInt();
-        int[] elements = new int[rows * cols];
-
-        System.out.println("Digite os elementos da matriz (linha por linha):");
-        for (int i = 0; i < rows * cols; i++) {
-            elements[i] = scanner.nextInt();
-        }
-
-        return new Matrix(rows, cols, elements);
-    }
-
-    // Método para criar um vetor manualmente
-    private static Vector criarVetor(Scanner scanner) {
-        System.out.print("Digite o tamanho do vetor: ");
-        int size = scanner.nextInt();
-        int[] elements = new int[size];
-
-        System.out.println("Digite os elementos do vetor:");
-        for (int i = 0; i < size; i++) {
-            elements[i] = scanner.nextInt();
-        }
-
-        return new Vector(elements);
     }
 
     // Método para multiplicar um escalar com uma matriz ou vetor
