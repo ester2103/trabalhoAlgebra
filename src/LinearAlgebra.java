@@ -23,7 +23,7 @@ public class LinearAlgebra {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    transposedElements[j * rows + i] = (int) matrix.get(i, j);
+                    transposedElements[j * rows + i] = (int) matrix.getElement(i, j);
                 }
             }
 
@@ -33,7 +33,7 @@ public class LinearAlgebra {
             Vector vector = (Vector) object;
             int[] elements = new int[vector.size()];
             for (int i = 0; i < vector.size(); i++) {
-                elements[i] = vector.get(i);
+                elements[i] = vector.getElement(i);
             }
             return new Matrix(elements.length, 1, elements);
         } else {
@@ -69,7 +69,7 @@ public class LinearAlgebra {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    sumElements[i * cols + j] = (int) (matrixA.get(i, j) + matrixB.get(i, j));
+                    sumElements[i * cols + j] = (int) (matrixA.getElement(i, j) + matrixB.getElement(i, j));
                 }
             }
 
@@ -85,7 +85,7 @@ public class LinearAlgebra {
 
             int[] sumElements = new int[vectorA.size()];
             for (int i = 0; i < vectorA.size(); i++) {
-                sumElements[i] = vectorA.get(i) + vectorB.get(i);
+                sumElements[i] = vectorA.getElement(i) + vectorB.getElement(i);
             }
 
             return new Vector(sumElements);
@@ -116,7 +116,7 @@ public class LinearAlgebra {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    resultElements[i * cols + j] = scalar * matrix.get(i, j);
+                    resultElements[i * cols + j] = scalar * matrix.getElement(i, j);
                 }
             }
             return new Matrix(rows, cols, resultElements);
@@ -127,7 +127,7 @@ public class LinearAlgebra {
             int[] resultElements = new int[vector.size()];
 
             for (int i = 0; i < vector.size(); i++) {
-                resultElements[i] = scalar * vector.get(i);
+                resultElements[i] = scalar * vector.getElement(i);
             }
             return new Vector(resultElements);
 
@@ -166,7 +166,7 @@ public class LinearAlgebra {
             for (int j = 0; j < colsB; j++) {
                 int sum = 0;
                 for (int k = 0; k < colsA; k++) {
-                    sum += matrixA.get(i, k) * matrixB.get(k, j);
+                    sum += matrixA.getElement(i, k) * matrixB.getElement(k, j);
                 }
                 resultElements[i * colsB + j] = sum;
             }
@@ -190,7 +190,7 @@ public class LinearAlgebra {
         // Copiando os elementos da matriz original
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                elements[i][j] = (double) a.get(i, j);
+                elements[i][j] = (double) a.getElement(i, j);
             }
         }
 
@@ -267,7 +267,7 @@ public class LinearAlgebra {
         // Copiando os elementos da matriz escalonada
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                elements[i][j] = (double) gaussMatrix.get(i, j);
+                elements[i][j] = (double) gaussMatrix.getElement(i, j);
             }
         }
 
