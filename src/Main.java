@@ -186,11 +186,11 @@ public class Main {
                     int scalarChoice = scanner.nextInt();
 
                     if (scalarChoice == 1) {
-                        Matrix scaledMatrix = (Matrix) times(scalar, matrixA);
+                        Matrix scaledMatrix = (Matrix) linearAlgebra.times(scalar, matrixA);
                         System.out.println("Matriz A multiplicada por " + scalar + ":");
                         scaledMatrix.printMatrix();
                     } else if (scalarChoice == 2) {
-                        Vector scaledVector = (Vector) times(scalar, vectorA);
+                        Vector scaledVector = (Vector) linearAlgebra.times(scalar, vectorA);
                         System.out.println("Vetor A multiplicado por " + scalar + ":");
                         scaledVector.show();
                     } else {
@@ -201,7 +201,7 @@ public class Main {
                 case 4:
                     System.out.println("\n=== Multiplicação de Matrizes ===");
                     try {
-                        Matrix productMatrix = dot(matrixA, matrixB);
+                        Matrix productMatrix = linearAlgebra.dot(matrixA, matrixB);
                         System.out.println("Produto das Matrizes A e B:");
                         productMatrix.printMatrix();
                     } catch (IllegalArgumentException e) {
@@ -232,57 +232,5 @@ public class Main {
                     System.out.println("Opção inválida. Tente novamente.");
             }
         }
-    }
-
-    // Método para multiplicar um escalar com uma matriz ou vetor
-    public static Object times(int a, Object b) {
-        if (b instanceof Matrix) {
-            Matrix matrix = (Matrix) b;
-            int rows = matrix.getRows();
-            int cols = matrix.getCols();
-            int[] resultElements = new int[rows * cols];
-
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    resultElements[i * cols + j] = (int) (a * matrix.get(i, j));
-                }
-            }
-
-            return new Matrix(rows, cols, resultElements);
-        } else if (b instanceof Vector) {
-            Vector vector = (Vector) b;
-            int[] resultElements = new int[vector.size()];
-
-            for (int i = 0; i < vector.size(); i++) {
-                resultElements[i] = a * vector.get(i);
-            }
-
-            return new Vector(resultElements);
-        } else {
-            throw new IllegalArgumentException("Tipo de objeto não suportado. Use Matrix ou Vector.");
-        }
-    }
-
-    // Método para multiplicar duas matrizes
-    public static Matrix dot(Matrix a, Matrix b) {
-        if (a.getCols() != b.getRows()) {
-            throw new IllegalArgumentException("O número de colunas de A deve ser igual ao número de linhas de B.");
-        }
-
-        int rows = a.getRows();
-        int cols = b.getCols();
-        int[] resultElements = new int[rows * cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                int sum = 0;
-                for (int k = 0; k < a.getCols(); k++) {
-                    sum += a.get(i, k) * b.get(k, j);
-                }
-                resultElements[i * cols + j] = sum;
-            }
-        }
-
-        return new Matrix(rows, cols, resultElements);
     }
 }
