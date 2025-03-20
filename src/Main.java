@@ -10,10 +10,10 @@ public class Main {
 
         // Matrizes e vetores pré-definidos
         int[] matrixAElements = {1, 2, 3, 4, 5, 6};
-        Matrix matrixA = new Matrix(2, 3, matrixAElements); // Matriz 2x3
+        Matrix matrixA = new Matrix(2, 3, matrixAElements);
 
         int[] matrixBElements = {7, 8, 9, 10, 11, 12};
-        Matrix matrixB = new Matrix(3, 2, matrixBElements); // Matriz 3x2
+        Matrix matrixB = new Matrix(3, 2, matrixBElements);
 
         int[] vectorAElements = {1, 2, 3};
         Vector vectorA = new Vector(vectorAElements);
@@ -124,6 +124,8 @@ public class Main {
             System.out.println("5. Eliminação Gaussiana");
             System.out.println("6. Resolver Sistema Linear");
             System.out.println("7. Voltar ao Menu Principal");
+            System.out.println("8. Retornar valor de uma posição da Matriz/Vetor");
+            System.out.println("9. Definir valor em uma posição da Matriz/Vetor");
             System.out.print("Escolha uma opção: ");
             int choice = scanner.nextInt();
 
@@ -228,9 +230,123 @@ public class Main {
                 case 7:
                     return; // Voltar ao menu principal
 
+                case 8:
+                    System.out.println("\n=== Retornar valor de uma posição ===");
+                    System.out.println("1. Retornar valor de uma posição da Matriz A");
+                    System.out.println("2. Retornar valor de uma posição da Matriz B");
+                    System.out.println("3. Retornar valor de uma posição do Vetor A");
+                    System.out.println("4. Retornar valor de uma posição do Vetor B");
+                    System.out.print("Escolha uma opção: ");
+                    int getChoice = scanner.nextInt();
+
+                    switch (getChoice) {
+                        case 1:
+                            retornarValorMatriz(matrixA, scanner);
+                            break;
+                        case 2:
+                            retornarValorMatriz(matrixB, scanner);
+                            break;
+                        case 3:
+                            retornarValorVetor(vectorA, scanner);
+                            break;
+                        case 4:
+                            retornarValorVetor(vectorB, scanner);
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                    break;
+
+                case 9:
+                    System.out.println("\n=== Definir valor em uma posição ===");
+                    System.out.println("1. Definir valor em uma posição da Matriz A");
+                    System.out.println("2. Definir valor em uma posição da Matriz B");
+                    System.out.println("3. Definir valor em uma posição do Vetor A");
+                    System.out.println("4. Definir valor em uma posição do Vetor B");
+                    System.out.print("Escolha uma opção: ");
+                    int setChoice = scanner.nextInt();
+
+                    switch (setChoice) {
+                        case 1:
+                            definirValorMatriz(matrixA, scanner);
+                            break;
+                        case 2:
+                            definirValorMatriz(matrixB, scanner);
+                            break;
+                        case 3:
+                            definirValorVetor(vectorA, scanner);
+                            break;
+                        case 4:
+                            definirValorVetor(vectorB, scanner);
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                    break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
+        }
+    }
+
+    // Método para retornar o valor de uma posição específica da matriz
+    private static void retornarValorMatriz(Matrix matriz, Scanner scanner) {
+        System.out.print("Digite o índice da linha: ");
+        int row = scanner.nextInt();
+        System.out.print("Digite o índice da coluna: ");
+        int col = scanner.nextInt();
+
+        try {
+            int valor = matriz.getElement(row, col); // Supondo que a classe Matrix tenha um método getElement
+            System.out.printf("Valor na posição [%d][%d]: %d\n", row, col, valor);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+    // Método para retornar o valor de uma posição específica do vetor
+    private static void retornarValorVetor(Vector vetor, Scanner scanner) {
+        System.out.print("Digite o índice do vetor: ");
+        int index = scanner.nextInt();
+
+        try {
+            int valor = vetor.getElement(index); // Supondo que a classe Vector tenha um método getElement
+            System.out.printf("Valor na posição [%d]: %d\n", index, valor);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+    // Método para definir um valor em uma posição específica da matriz
+    private static void definirValorMatriz(Matrix matriz, Scanner scanner) {
+        System.out.print("Digite o índice da linha: ");
+        int row = scanner.nextInt();
+        System.out.print("Digite o índice da coluna: ");
+        int col = scanner.nextInt();
+        System.out.print("Digite o valor a ser definido: ");
+        int valor = scanner.nextInt();
+
+        try {
+            matriz.setElement(row, col, valor); // Supondo que a classe Matrix tenha um método setElement
+            System.out.printf("Valor definido na posição [%d][%d]: %d\n", row, col, valor);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+    }
+
+    // Método para definir um valor em uma posição específica do vetor
+    private static void definirValorVetor(Vector vetor, Scanner scanner) {
+        System.out.print("Digite o índice do vetor: ");
+        int index = scanner.nextInt();
+        System.out.print("Digite o valor a ser definido: ");
+        int valor = scanner.nextInt();
+
+        try {
+            vetor.setElement(index, valor); // Supondo que a classe Vector tenha um método setElement
+            System.out.printf("Valor definido na posição [%d]: %d\n", index, valor);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
         }
     }
 }
