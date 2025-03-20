@@ -229,6 +229,16 @@ public class LinearAlgebra {
             }
         }
 
+        // Substituição retroativa para obter a forma escalonada reduzida
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                double factor = elements[j][i];
+                for (int k = i; k < cols; k++) {
+                    elements[j][k] -= factor * elements[i][k];
+                }
+            }
+        }
+
         // Convertendo a matriz reduzida para o formato Matrix
         int[] flatElements = new int[rows * cols];
         for (int i = 0; i < rows; i++) {
@@ -265,11 +275,11 @@ public class LinearAlgebra {
 
         // Substituição retroativa
         for (int i = rows - 1; i >= 0; i--) {
-            double sum = 0;
+            solutions[i] = elements[i][cols - 1]; // Valor da coluna de termos independentes
             for (int j = i + 1; j < cols - 1; j++) {
-                sum += elements[i][j] * solutions[j];
+                solutions[i] -= elements[i][j] * solutions[j];
             }
-            solutions[i] = (elements[i][cols - 1] - sum) / elements[i][i];
+            solutions[i] /= elements[i][i]; // Dividir pelo coeficiente da variável
         }
 
         // Convertendo as soluções para int
