@@ -19,11 +19,11 @@ public class LinearAlgebra {
             Matrix matrix = (Matrix) object;
             int rows = matrix.getRows();
             int cols = matrix.getCols();
-            int[] transposedElements = new int[rows * cols];
+            double[] transposedElements = new double[rows * cols];
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    transposedElements[j * rows + i] = (int) matrix.getElement(i, j);
+                    transposedElements[j * rows + i] = matrix.getElement(i, j);
                 }
             }
 
@@ -31,7 +31,7 @@ public class LinearAlgebra {
         } else if (object instanceof Vector) {
             // Transpor um vetor (transformar em matriz coluna)
             Vector vector = (Vector) object;
-            int[] elements = new int[vector.size()];
+            double[] elements = new double[vector.size()];
             for (int i = 0; i < vector.size(); i++) {
                 elements[i] = vector.getElement(i);
             }
@@ -65,11 +65,11 @@ public class LinearAlgebra {
 
             int rows = matrixA.getRows();
             int cols = matrixA.getCols();
-            int[] sumElements = new int[rows * cols];
+            double[] sumElements = new double[rows * cols];
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    sumElements[i * cols + j] = (int) (matrixA.getElement(i, j) + matrixB.getElement(i, j));
+                    sumElements[i * cols + j] = matrixA.getElement(i, j) + matrixB.getElement(i, j);
                 }
             }
 
@@ -83,7 +83,7 @@ public class LinearAlgebra {
                 throw new IllegalArgumentException("Os vetores devem ter o mesmo tamanho para soma.");
             }
 
-            int[] sumElements = new int[vectorA.size()];
+            double[] sumElements = new double[vectorA.size()];
             for (int i = 0; i < vectorA.size(); i++) {
                 sumElements[i] = vectorA.getElement(i) + vectorB.getElement(i);
             }
@@ -102,7 +102,7 @@ public class LinearAlgebra {
      * @return A matriz ou vetor resultante da multiplicação.
      * @throws IllegalArgumentException Se o objeto não for uma matriz ou vetor.
      */
-    public Object times(int scalar, Object object) {
+    public Object times(double scalar, Object object) {
         if (object == null) {
             throw new IllegalArgumentException("O objeto não pode ser nulo.");
         }
@@ -112,7 +112,7 @@ public class LinearAlgebra {
             Matrix matrix = (Matrix) object;
             int rows = matrix.getRows();
             int cols = matrix.getCols();
-            int[] resultElements = new int[rows * cols];
+            double[] resultElements = new double[rows * cols];
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
@@ -124,7 +124,7 @@ public class LinearAlgebra {
         } else if (object instanceof Vector) {
             // Multiplicar um vetor pelo escalar
             Vector vector = (Vector) object;
-            int[] resultElements = new int[vector.size()];
+            double[] resultElements = new double[vector.size()];
 
             for (int i = 0; i < vector.size(); i++) {
                 resultElements[i] = scalar * vector.getElement(i);
@@ -159,12 +159,12 @@ public class LinearAlgebra {
             throw new IllegalArgumentException("Número de colunas de A deve ser igual ao número de linhas de B.");
         }
 
-        int[] resultElements = new int[rowsA * colsB];
+        double[] resultElements = new double[rowsA * colsB];
 
         // Multiplicação de matrizes (produto matricial)
         for (int i = 0; i < rowsA; i++) {
             for (int j = 0; j < colsB; j++) {
-                int sum = 0;
+                double sum = 0;
                 for (int k = 0; k < colsA; k++) {
                     sum += matrixA.getElement(i, k) * matrixB.getElement(k, j);
                 }
@@ -190,7 +190,7 @@ public class LinearAlgebra {
         // Copiando os elementos da matriz original
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                elements[i][j] = (double) a.getElement(i, j);
+                elements[i][j] = a.getElement(i, j);
             }
         }
 
@@ -240,10 +240,10 @@ public class LinearAlgebra {
         }
 
         // Convertendo a matriz reduzida para o formato Matrix
-        int[] flatElements = new int[rows * cols];
+        double[] flatElements = new double[rows * cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                flatElements[i * cols + j] = (int) Math.round(elements[i][j]); // Arredondar para int
+                flatElements[i * cols + j] = elements[i][j]; // Sem arredondamento
             }
         }
 
@@ -267,7 +267,7 @@ public class LinearAlgebra {
         // Copiando os elementos da matriz escalonada
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                elements[i][j] = (double) gaussMatrix.getElement(i, j);
+                elements[i][j] = gaussMatrix.getElement(i, j);
             }
         }
 
@@ -282,12 +282,12 @@ public class LinearAlgebra {
             solutions[i] /= elements[i][i]; // Dividir pelo coeficiente da variável
         }
 
-        // Convertendo as soluções para int
-        int[] intSolutions = new int[rows];
+        // Convertendo as soluções para double (sem arredondamento)
+        double[] doubleSolutions = new double[rows];
         for (int i = 0; i < rows; i++) {
-            intSolutions[i] = (int) Math.round(solutions[i]);
+            doubleSolutions[i] = solutions[i];
         }
 
-        return new Matrix(rows, 1, intSolutions);
+        return new Matrix(rows, 1, doubleSolutions);
     }
 }

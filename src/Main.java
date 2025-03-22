@@ -8,20 +8,20 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         LinearAlgebra linearAlgebra = new LinearAlgebra();
 
-        // Matrizes e vetores pré-definidos
-        int[] matrixAElements = {1, 2, 3, 4, 5, 6};
+        // Matrizes e vetores pré-definidos (usando double)
+        double[] matrixAElements = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
         Matrix matrixA = new Matrix(2, 3, matrixAElements);
 
-        int[] matrixBElements = {7, 8, 9, 10, 11, 12};
+        double[] matrixBElements = {7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
         Matrix matrixB = new Matrix(3, 2, matrixBElements);
 
-        int[] vectorAElements = {1, 2, 3};
+        double[] vectorAElements = {1.0, 2.0, 3.0};
         Vector vectorA = new Vector(vectorAElements);
 
-        int[] vectorBElements = {4, 5, 6};
+        double[] vectorBElements = {4.0, 5.0, 6.0};
         Vector vectorB = new Vector(vectorBElements);
 
-        int[] gaussMatrixElements = {2, 1, -1, 8, -3, -1, 2, -11, -2, 1, 2, -3};
+        double[] gaussMatrixElements = {2.0, 1.0, -1.0, 8.0, -3.0, -1.0, 2.0, -11.0, -2.0, 1.0, 2.0, -3.0};
         Matrix gaussMatrix = new Matrix(3, 4, gaussMatrixElements);
 
         while (true) {
@@ -36,7 +36,7 @@ public class Main {
                 // Usar matrizes/vetores pré-definidos
                 System.out.println("\n=== Usando Matrizes/Vetores Pré-definidos ===");
                 printAll(matrixA, matrixB, vectorA, vectorB, gaussMatrix); // Imprime tudo de uma vez
-                menuOperacoes(matrixA, matrixB, vectorA, vectorB, gaussMatrix, linearAlgebra);
+                menuOperacoes(matrixA, matrixB, vectorA, vectorB, gaussMatrix, linearAlgebra, scanner);
             } else if (choice == 2) {
                 // Inserir matrizes/vetores manualmente
                 System.out.println("\n=== Inserir Matrizes/Vetores Manualmente ===");
@@ -46,7 +46,7 @@ public class Main {
                 Vector customVectorB = criarVetor(scanner);
                 Matrix customGaussMatrix = criarMatriz(scanner);
 
-                menuOperacoes(customMatrixA, customMatrixB, customVectorA, customVectorB, customGaussMatrix, linearAlgebra);
+                menuOperacoes(customMatrixA, customMatrixB, customVectorA, customVectorB, customGaussMatrix, linearAlgebra, scanner);
             } else if (choice == 3) {
                 System.out.println("Saindo...");
                 break;
@@ -83,13 +83,13 @@ public class Main {
         int rows = scanner.nextInt();
         System.out.print("Digite o número de colunas da matriz: ");
         int cols = scanner.nextInt();
-        int[] elements = new int[rows * cols];
+        double[] elements = new double[rows * cols];
 
         System.out.println("Digite os elementos da matriz (linha por linha):");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.printf("Elemento a[%d][%d]: ", i, j); // Mostra o índice (i, j)
-                elements[i * cols + j] = scanner.nextInt(); // Armazena o valor na posição correta
+                elements[i * cols + j] = scanner.nextDouble(); // Armazena o valor na posição correta
             }
         }
 
@@ -100,21 +100,19 @@ public class Main {
     private static Vector criarVetor(Scanner scanner) {
         System.out.print("Digite o tamanho do vetor: ");
         int size = scanner.nextInt();
-        int[] elements = new int[size];
+        double[] elements = new double[size];
 
         System.out.println("Digite os elementos do vetor:");
         for (int i = 0; i < size; i++) {
             System.out.printf("Elemento v[%d]: ", i); // Mostra o índice (i)
-            elements[i] = scanner.nextInt();
+            elements[i] = scanner.nextDouble();
         }
 
         return new Vector(elements);
     }
 
     // Método para exibir o menu de operações
-    private static void menuOperacoes(Matrix matrixA, Matrix matrixB, Vector vectorA, Vector vectorB, Matrix gaussMatrix, LinearAlgebra linearAlgebra) {
-        Scanner scanner = new Scanner(System.in);
-
+    private static void menuOperacoes(Matrix matrixA, Matrix matrixB, Vector vectorA, Vector vectorB, Matrix gaussMatrix, LinearAlgebra linearAlgebra, Scanner scanner) {
         while (true) {
             System.out.println("\n=== Menu de Operações ===");
             System.out.println("1. Transpor Matriz/Vetor");
@@ -181,7 +179,7 @@ public class Main {
                 case 3:
                     System.out.println("\n=== Multiplicação por Escalar ===");
                     System.out.print("Digite o escalar: ");
-                    int scalar = scanner.nextInt();
+                    double scalar = scanner.nextDouble();
                     System.out.println("1. Multiplicar Matriz A por Escalar");
                     System.out.println("2. Multiplicar Vetor A por Escalar");
                     System.out.print("Escolha uma opção: ");
@@ -298,8 +296,8 @@ public class Main {
         int col = scanner.nextInt();
 
         try {
-            int valor = matriz.getElement(row, col); // Supondo que a classe Matrix tenha um método getElement
-            System.out.printf("Valor na posição [%d][%d]: %d\n", row, col, valor);
+            double valor = matriz.getElement(row, col);
+            System.out.printf("Valor na posição [%d][%d]: %.6f\n", row, col, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -311,8 +309,8 @@ public class Main {
         int index = scanner.nextInt();
 
         try {
-            int valor = vetor.getElement(index); // Supondo que a classe Vector tenha um método getElement
-            System.out.printf("Valor na posição [%d]: %d\n", index, valor);
+            double valor = vetor.getElement(index);
+            System.out.printf("Valor na posição [%d]: %.6f\n", index, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -325,11 +323,11 @@ public class Main {
         System.out.print("Digite o índice da coluna: ");
         int col = scanner.nextInt();
         System.out.print("Digite o valor a ser definido: ");
-        int valor = scanner.nextInt();
+        double valor = scanner.nextDouble();
 
         try {
-            matriz.setElement(row, col, valor); // Supondo que a classe Matrix tenha um método setElement
-            System.out.printf("Valor definido na posição [%d][%d]: %d\n", row, col, valor);
+            matriz.setElement(row, col, valor);
+            System.out.printf("Valor definido na posição [%d][%d]: %.6f\n", row, col, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -340,11 +338,11 @@ public class Main {
         System.out.print("Digite o índice do vetor: ");
         int index = scanner.nextInt();
         System.out.print("Digite o valor a ser definido: ");
-        int valor = scanner.nextInt();
+        double valor = scanner.nextDouble();
 
         try {
-            vetor.setElement(index, valor); // Supondo que a classe Vector tenha um método setElement
-            System.out.printf("Valor definido na posição [%d]: %d\n", index, valor);
+            vetor.setElement(index, valor);
+            System.out.printf("Valor definido na posição [%d]: %.6f\n", index, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }

@@ -3,9 +3,9 @@ package src;
 public class Matrix {
     private int rows;
     private int cols;
-    private int[] elements;
+    private double[] elements; // Usando double para maior precisão
 
-    public Matrix(int rows, int cols, int[] elements) {
+    public Matrix(int rows, int cols, double[] elements) {
         this.rows = rows;
         this.cols = cols;
         this.elements = elements;
@@ -20,7 +20,7 @@ public class Matrix {
     }
 
     // Retorna o elemento na posição (i, j)
-    public int getElement(int i, int j) {
+    public double getElement(int i, int j) {
         if (i < 0 || i >= rows || j < 0 || j >= cols) {
             throw new IllegalArgumentException("Índices fora dos limites da matriz.");
         }
@@ -28,7 +28,7 @@ public class Matrix {
     }
 
     // Define o elemento na posição (i, j)
-    public void setElement(int i, int j, int value) {
+    public void setElement(int i, int j, double value) {
         if (i < 0 || i >= rows || j < 0 || j >= cols) {
             throw new IllegalArgumentException("Índices fora dos limites da matriz.");
         }
@@ -39,7 +39,7 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.print(elements[i * cols + j] + " ");
+                System.out.printf("%.6f ", elements[i * cols + j]); // Formatação para 6 casas decimais
             }
             System.out.println();
         }

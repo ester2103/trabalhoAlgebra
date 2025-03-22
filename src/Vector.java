@@ -1,9 +1,9 @@
 package src;
 
 public class Vector {
-    private int[] elements;
+    private double[] elements; // Usando double para maior precisão
 
-    public Vector(int[] elements) {
+    public Vector(double[] elements) {
         this.elements = elements;
     }
 
@@ -13,7 +13,7 @@ public class Vector {
     }
 
     // Retorna o elemento na posição i
-    public int getElement(int i) {
+    public double getElement(int i) {
         if (i < 0 || i >= elements.length) {
             throw new IllegalArgumentException("Índice fora dos limites do vetor.");
         }
@@ -21,7 +21,7 @@ public class Vector {
     }
 
     // Define o elemento na posição i
-    public void setElement(int i, int value) {
+    public void setElement(int i, double value) {
         if (i < 0 || i >= elements.length) {
             throw new IllegalArgumentException("Índice fora dos limites do vetor.");
         }
@@ -30,8 +30,8 @@ public class Vector {
 
     // Imprime o vetor
     public void show() {
-        for (int element : elements) {
-            System.out.print(element + " ");
+        for (double element : elements) {
+            System.out.printf("%.6f ", element); // Formatação para 6 casas decimais
         }
         System.out.println();
     }
