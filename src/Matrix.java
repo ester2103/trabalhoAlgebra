@@ -39,7 +39,7 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.printf("%.6f ", elements[i * cols + j]); // Formatação para 6 casas decimais
+                System.out.printf("%.2f ", elements[i * cols + j]); // Formatação para 6 casas decimais
             }
             System.out.println();
         }

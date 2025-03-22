@@ -297,7 +297,7 @@ public class Main {
 
         try {
             double valor = matriz.getElement(row, col);
-            System.out.printf("Valor na posição [%d][%d]: %.6f\n", row, col, valor);
+            System.out.printf("Valor na posição [%d][%d]: %.3f\n", row, col, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -310,7 +310,7 @@ public class Main {
 
         try {
             double valor = vetor.getElement(index);
-            System.out.printf("Valor na posição [%d]: %.6f\n", index, valor);
+            System.out.printf("Valor na posição [%d]: %.3f\n", index, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -327,7 +327,7 @@ public class Main {
 
         try {
             matriz.setElement(row, col, valor);
-            System.out.printf("Valor definido na posição [%d][%d]: %.6f\n", row, col, valor);
+            System.out.printf("Valor definido na posição [%d][%d]: %.3f\n", row, col, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -342,7 +342,7 @@ public class Main {
 
         try {
             vetor.setElement(index, valor);
-            System.out.printf("Valor definido na posição [%d]: %.6f\n", index, valor);
+            System.out.printf("Valor definido na posição [%d]: %.3f\n", index, valor);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage());
         }

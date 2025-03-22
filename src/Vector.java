@@ -31,7 +31,7 @@ public class Vector {
     // Imprime o vetor
     public void show() {
         for (double element : elements) {
-            System.out.printf("%.6f ", element); // Formatação para 6 casas decimais
+            System.out.printf("%.2f ", element); // Formatação para 6 casas decimais
         }
         System.out.println();
     }
